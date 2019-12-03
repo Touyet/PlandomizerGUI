@@ -40,16 +40,16 @@
                         Hash<span class="badge badge-danger">New</span>
                     </div>
                 </div>
-<!--                <div>-->
-<!--                    <div class="list-group-item list-group-item-action active" v-if="group_area.group_area_id == 0 && current_area == -2"-->
-<!--                         v-on:click="changeArea(-2)">-->
-<!--                        Gossip<span class="badge badge-danger">New</span>-->
-<!--                    </div>-->
-<!--                    <div class="list-group-item list-group-item-action" v-else-if="group_area.group_area_id == 0"-->
-<!--                         v-on:click="changeArea(-2)">-->
-<!--                        Gossip<span class="badge badge-danger">New</span>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div>
+                    <div class="list-group-item list-group-item-action active" v-if="group_area.group_area_id == 0 && current_area == -2"
+                         v-on:click="changeArea(-2)">
+                        Gossip<span class="badge badge-danger">New</span>
+                    </div>
+                    <div class="list-group-item list-group-item-action" v-else-if="group_area.group_area_id == 0"
+                         v-on:click="changeArea(-2)">
+                        Gossip<span class="badge badge-danger">New</span>
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <div
@@ -59,8 +59,8 @@
                     <div class="row border">
                         <div class="col border-right"><label :for="location.name">{{location.name}}</label></div>
                         <md-field style="width:auto; margin: 0;" v-if="current_area.area_id == 0">
-                        <md-select v-model="plando[location.name]">
-                            <md-option default value=""></md-option>
+                        <md-select v-model="plando[location.name]" md-dense>
+                            <md-option default value="">Nothing</md-option>
                             <md-option
                                     v-bind:key="item.item_id"
                                     v-bind:value="item.name"
@@ -70,8 +70,8 @@
                         </md-select>
                         </md-field>
                         <md-field style="width:auto; margin: 0;"  v-else-if="current_area.area_id == 1">
-                            <md-select v-model="plando[location.name]">
-                                <md-option default value=""></md-option>
+                            <md-select v-model="plando[location.name]" md-dense>
+                                <md-option default value="">Nothing</md-option>
                                 <md-option
                                         v-bind:key="item.item_id"
                                         v-bind:value="item.name"
@@ -82,8 +82,8 @@
                         </md-field>
                         <md-field style="width:auto; margin: 0;" v-else>
                             <md-select class="selectpicker" data-live-search="true" data-show-subtext="true"
-                                    v-model="plando[location.name]">
-                                <md-option default value=""></md-option>
+                                    v-model="plando[location.name]" md-dense>
+                                <md-option default value="">Nothing</md-option>
                                 <md-optgroup
                                         v-bind:key="group_items.group_item_id"
                                         v-bind:label="group_items.name"
@@ -108,8 +108,8 @@
                              v-if="hash_code[i-1] !== 'none'" v-on:click="open('#hash_' + i)">
                         <img alt="" class="d-block m-auto" src="https://ootrandomizer.com/img/hash/none.png" v-else>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select :id="'hash_' + i" class="selectpicker" v-model="hash_code[i-1]">
-                                <md-option default value=""></md-option>
+                            <md-select :id="'hash_' + i" class="selectpicker" v-model="hash_code[i-1]" md-dense>
+                                <md-option default value="">Nothing</md-option>
                                 <md-option
                                         v-bind:key="hash"
                                         v-bind:value="hash"
@@ -125,7 +125,7 @@
                     <div class="m-2">
                         <label>Choose the gossip stone</label>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select class="selectpicker" v-model="current_gossip">
+                            <md-select class="selectpicker" v-model="current_gossip" md-dense>
                                 <md-option
                                         v-bind:key="gossip"
                                         v-bind:value="gossip"
@@ -138,11 +138,11 @@
                     <div class="m-2">
                         <label>Choose the category</label>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select class="selectpicker" v-model="hints[current_gossip]['category']">
+                            <md-select class="selectpicker" v-model="hints[current_gossip]['category']" md-dense>
                                 <md-option value="WOTH">Way of the Hero</md-option>
                                 <md-option value="Foolish">Foolish/Barren of Treasure</md-option>
                                 <md-option value="Always">Always Hint</md-option>
-                                <md-option value="Sometime">Sometime hint</md-option>
+                                <md-option value="Sometime">Hint for location</md-option>
                                 <md-option value="Other">Custom</md-option>
                             </md-select>
                         </md-field>
@@ -150,20 +150,20 @@
                     <div v-if="hints[current_gossip]['category'] === 'WOTH' || hints[current_gossip]['category'] === 'Foolish'">
                         <label>Choose the Area</label>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select class="selectpicker" v-model="hints[current_gossip]['area']">
+                            <md-select class="selectpicker" v-model="hints[current_gossip]['area']" md-dense>
                                 <md-option
                                         v-bind:key="area"
                                         v-bind:value="area"
                                         v-for="area in area_list"
-                                >{{area}}
+                                >{{area.name}}
                                 </md-option>
                             </md-select>
                         </md-field>
                     </div>
-                    <div v-if="hints[current_gossip]['category'] === 'Always'">
+                    <div v-else-if="hints[current_gossip]['category'] === 'Always'">
                         <label>Choose the always hint</label>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select class="selectpicker" v-model="hints[current_gossip]['hint']">
+                            <md-select class="selectpicker" v-model="hints[current_gossip]['always']" md-dense>
                                 <md-option value="30skull">30 Gold Skulltulas</md-option>
                                 <md-option value="40skull">40 Gold Skulltulas</md-option>
                                 <md-option value="50skull">50 Gold Skulltulas</md-option>
@@ -172,6 +172,18 @@
                                 <md-option value="frogs">Frogs</md-option>
                                 <md-option value="OoT">OoT</md-option>
                             </md-select>
+                        </md-field>
+                    </div>
+                    <div v-else-if="hints[current_gossip]['category'] === 'Sometime'">
+                        <label>Choose location</label>
+                        <md-autocomplete v-model="hints[current_gossip]['location']" :md-options="all_locations.map((e) => e.name)" :value="all_locations">
+                            <label>Location</label>
+                        </md-autocomplete>
+                    </div>
+                    <div v-else-if="hints[current_gossip]['category'] === 'Other'">
+                        <label>Enter the hint</label>
+                        <md-field>
+                        <md-textarea v-model="hints[current_gossip]['hint']" md-autogrow></md-textarea>
                         </md-field>
                     </div>
                 </div>
@@ -215,7 +227,8 @@
                 hash_code: ["none", "none", "none", "none", "none"],
                 gossip_list: gossip_list,
                 current_gossip: gossip_list[0],
-                hints: gossip_hint
+                hints: gossip_hint,
+                all_locations: [],
             }
         },
         methods: {
@@ -297,14 +310,9 @@
             this.name = "undefined";
             this.current_area = this.group_area.areas[0];
             this.plando = {};
-            this.area_list = [];
-            for(const i in this.map.groups_area)
-            {
-                for(const j in this.map.groups_area[i].areas)
-                {
-                    this.area_list.push(this.map.groups_area[i].areas[j].name)
-                }
-            }
+            this.area_list = map.getAllArea();
+            this.all_locations = map.getAllLocations();
+
         }
     }
 </script>

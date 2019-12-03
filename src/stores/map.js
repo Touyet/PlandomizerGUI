@@ -7,6 +7,37 @@ class Map {
     {
         this.groups_area = groups_area;
     }
+
+    getAllArea() {
+        const areas = [];
+        for(let i=0; i<this.groups_area.length; i++)
+        {
+            const groupArea = this.groups_area[i];
+            for(let j=0; j<groupArea.areas.length; j++) {
+                const area = groupArea.areas[i];
+                areas.push(area);
+            }
+        }
+        return areas;
+    }
+
+    getAllLocations() {
+        const areas = this.getAllArea();
+        const locations = [];
+        for(let i=0; i<this.groups_area.length; i++)
+        {
+            const groupArea = this.groups_area[i];
+            for(let j=0; j<groupArea.areas.length; j++) {
+                const area = groupArea.areas[j];
+                for(let k=0; k<area.locations.length; k++)
+                {
+                    const location = area.locations[k];
+                    locations.push(location);
+                }
+            }
+        }
+        return locations;
+    }
 }
 
 //Stone and Medallions

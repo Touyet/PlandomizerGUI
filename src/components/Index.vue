@@ -122,6 +122,12 @@
 
                 </div>
                 <div v-else-if="current_area == -2">
+                    <div v-if="(hints[current_gossip]['category'] === 'Sometime' || hints[current_gossip]['category'] === 'Other') && hints[current_gossip]['location'] !== undefined && (plando[hints[current_gossip]['location']] === undefined || (plando[hints[current_gossip]['location']].length === 0))" class="alert alert-warning alert-dismissible fade show" role="alert">
+                       You don't defined what object is in {{hints[current_gossip]['location']}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="m-2">
                         <label>Choose the gossip stone</label>
                         <md-field style="width:auto; margin: 0;">
@@ -163,7 +169,7 @@
                     <div v-else-if="hints[current_gossip]['category'] === 'Always'">
                         <label>Choose the always hint</label>
                         <md-field style="width:auto; margin: 0;">
-                            <md-select class="selectpicker" v-model="hints[current_gossip]['always']" md-dense>
+                            <md-select class="selectpicker" v-model="hints[current_gossip]['location']" md-dense>
                                 <md-option value="30skull">30 Gold Skulltulas</md-option>
                                 <md-option value="40skull">40 Gold Skulltulas</md-option>
                                 <md-option value="50skull">50 Gold Skulltulas</md-option>
@@ -195,6 +201,7 @@
                 <button class="btn btn-primary d-inline-block" v-on:click="upload()">Upload</button>
             </div>
             <button class="btn btn-success d-inline-block" v-on:click="download()">Download</button>
+            <button class="btn btn-success d-inline-block" v-on:click="test()">Test</button>
         </div>
     </div>
 </template>
@@ -304,6 +311,46 @@
                 });
                 return copy;
             },
+            generateWOTH(area) {
+                return {"text": "They say that #"+ area +"# is on the way of the hero", "colors": ["Light Blue"]};
+            },
+            generateBarren(area) {
+                return {"text": "They say that plundering #"+ area +"# is a foolish choice", "colors": ["Pink"]};
+            },
+            generateLocation(location) {
+                const item = this.plando[location];
+                return {"text": "They say that #"+ location +"# is #"+ item +"#.", "colors": ["Green", "Red"]};
+            },
+            generateDefault(text) {
+                return {"text": text, "colors": []};
+            },
+            generateGossip(gossip) {
+                switch(gossip.category) {
+                    case "WOTH":
+                        return this.generateWOTH(gossip.area);
+                    case "Foolish":
+                        return this.generateBarren(gossip.area);
+                    case "Always":
+                    case "Sometime":
+                        return this.generateLocation(gossip.location);
+                    case "Other":
+                        return this.generateDefault(gossip.hint);
+                }
+                return undefined;
+            },
+            generateAllGossip() {
+                const gossips = {};
+                Object.keys(this.hints).forEach(key => {
+                    const gossip = this.hints[key];
+                    const generated = this.generateGossip(gossip);
+                    if(generated != null)
+                        gossips[key] = generated
+                })
+                return gossips;
+            },
+            test() {
+                console.log(this.generateAllGossip())
+            }
         },
         mounted() {
             // console.log(this.$route.params.id);

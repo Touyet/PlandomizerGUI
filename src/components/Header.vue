@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="title">Plandomizer</div>
-		<small>v.2.1.2 Release</small>
+		<small>v.2.1.3 Release</small>
         <small> - By RawZ</small>
         <div class="links">
             <router-link class="link" to="/">Home</router-link>

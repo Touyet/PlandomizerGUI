@@ -8,10 +8,14 @@
 		</ul>
 		<br>
 		<br>
-		<h3>VERSION 2.1.2<span class="badge badge-danger">New</span></h3>
+		<h3>VERSION 2.1.3<span class="badge badge-danger">New</span></h3>
 		<ul>
 			<li>New design for all select</li>
 			<li>Customization hash seed</li>
+		</ul>
+		<h3>VERSION 2.1.2</h3>
+		<ul>
+			It's internal version
 		</ul>
 		<h3>VERSION 2.1.1</h3>
 		<ul>

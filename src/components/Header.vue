@@ -5,13 +5,13 @@
         <small> - By RawZ</small>
         <div class="links">
             <router-link class="link" to="/">Home</router-link>
-			 <router-link class="link" to="/changelog">Changelog</router-link>
+            <router-link class="link" to="/about">About</router-link><span class="badge badge-danger">New</span>
+			<router-link class="link" to="/changelog">Changelog</router-link>
         </div>
     </header>
 </template>
 
 <script>
-
 export default {
     name: 'Header'
 }

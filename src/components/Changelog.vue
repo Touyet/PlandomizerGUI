@@ -10,12 +10,15 @@
 		<br>
 		<h3>VERSION 2.1.3<span class="badge badge-danger">New</span></h3>
 		<ul>
-			<li>New design for all select</li>
-			<li>Customization hash seed</li>
+			<li>Add About page :
+				<router-link class="link" to="/about">Click here</router-link>
+			</li>
+			<li>Fix bottom buttons position</li>
 		</ul>
 		<h3>VERSION 2.1.2</h3>
 		<ul>
-			It's internal version
+			<li>New design for all select</li>
+			<li>Customization hash seed</li>
 		</ul>
 		<h3>VERSION 2.1.1</h3>
 		<ul>
@@ -46,7 +49,9 @@
 		</ul>
 		<h3>VERSION BETA 2.0.2</h3>
 		<ul>
-			<li>Bugfix : If you fill a location with a blank item, it is removed of the list when you download the plando</li>
+			<li>Bugfix : If you fill a location with a blank item, it is removed of the list when you download the
+				plando
+			</li>
 		</ul>
 		<h3>VERSION BETA 2.0.1</h3>
 		<ul>
@@ -60,7 +65,7 @@
 </template>
 
 <script>
-export default {
-	name: "Changelog"
-}
+	export default {
+		name: "Changelog"
+	}
 </script>
